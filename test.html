@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <link rel="stylesheet" type="text/css" href="css/css.css"/>
+  <script type="text/javascript">
+var lineObjOffsetTop = 2;
+function createTextAreaWithLines(id)
+{
+  var el = document.createElement('DIV');
+  var ta = document.getElementById(id);
+  ta.parentNode.insertBefore(el,ta);
+  el.appendChild(ta);
+  el.className='textAreaWithLines';
+  el.style.width = (ta.offsetWidth + 30) + 'px';
+  ta.style.position = 'absolute';
+  ta.style.left = '30px';
+  el.style.height = (ta.offsetHeight + 2) + 'px';
+  el.style.overflow='hidden';
+  el.style.position = 'relative';
+  el.style.width = (ta.offsetWidth + 30) + 'px';
+  var lineObj = document.createElement('DIV');
+  lineObj.style.position = 'absolute';
+  lineObj.style.top = lineObjOffsetTop + 'px';
+  lineObj.style.left = '0px';
+  lineObj.style.width = '27px';
+  el.insertBefore(lineObj,ta);
+  lineObj.style.textAlign = 'right';
+  lineObj.className='lineObj';
+  var string = '';
+  for(var no=1;no<20;no++){
+   if(string.length>0)string = string + '<br>';
+   string = string + no;
+  }
+   ta.onkeydown = function() { positionLineObj(lineObj,ta); };
+   ta.onmousedown = function() { positionLineObj(lineObj,ta); };
+   ta.onscroll = function() { positionLineObj(lineObj,ta); };
+   ta.onblur = function() { positionLineObj(lineObj,ta); };
+   ta.onfocus = function() { positionLineObj(lineObj,ta); };
+   ta.onmouseover = function() { positionLineObj(lineObj,ta); };
+   lineObj.innerHTML = string;
+  }
+function positionLineObj(obj,ta)
+{
+   obj.style.top = (ta.scrollTop * -1 + lineObjOffsetTop) + 'px';
+}
+</script>
+</head>
+<body>
+  <!-- 整个页面 -->
+  <div class="all">
+
+    <!-- 左侧导航栏 -->
+    <div class="nag">
+      <a href="#"><img src="images/head.png"/></a>
+      <a href="#"><img src="images/level.png"/></a>
+      <a href="#"><img src="images/btn1.png"/></a>
+      <a href="#"><img src="images/btn2.png"/></a>
+      <a href="#"><img src="images/btn3.png"/></a>
+      <a href="#"><img src="images/btn4.png"/></a>
+      <div class="friends">
+        <a href="#">
+          <img src="images/friends.png"/>
+        </a>
+      </div>
+    </div>
+
+    <!-- 右侧聊天室 -->
+    <div class="chat"></div>
+
+    <!-- 整个中间 -->
+    <div class="mains">
+
+      <!-- 上方横幅 -->
+      <div class="banner">
+        <div class="word_one">ASCII&nbsp;Art</div>
+      </div>
+
+      <!-- 下方内容 -->
+      <div class="containers">
+        <!-- 左部分描述 -->
+        <div class="left">
+          <!-- 游戏描述 -->
+          <div class="discription">
+
+          </div>
+
+          <!-- 输出口 -->
+          <div class="console_output">
+            <!-- 标题 -->
+            <div class="output">
+              Console&nbsp;output
+            </div>
+            <!-- 输出台 -->
+            <div class="put">
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 右部分编写 -->
+        <div class="right">
+          <!-- 代码编写处 -->
+          <div class="write_code">
+            <div class="write_top">
+              <select class="drop-down">
+                <option>Elm</option>
+                <option>Haskell</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>PHP</option>
+              </select>
+            </div>
+            <textarea id="codeTextarea">
+            </textarea>
+          </div>
+
+          <div class="right_bottom">
+            <!-- 测试用例 -->
+            <div class="test_cases">
+              <!-- 标题 -->
+              <div class="top">
+                <div class="word_two">Test&nbsp;cases</div>
+                <div class="img_one"><img src="images/menu.png"/></div>
+              </div>
+              <!-- 测试题 -->
+              <div class="bottom">
+
+                <div class="test">
+                  <button class="btn_test">
+                    <span>
+                      ▶ PLAY TESTCASES
+                    </span>
+                  </button>
+                  <span class="img_0">
+                    <img src="images/01.png"/>
+                  </span>
+                  <div class="word_0">Test only letter:E</div>
+                </div>
+
+                <div class="test">
+                  <button class="btn_test">
+                    <span>
+                      ▶ PLAY TESTCASES
+                    </span>
+                  </button>
+                  <span class="img_0">
+                    <img src="images/02.png"/>
+                  </span>
+                  <div class="word_0">Test MANHATTAN</div>
+                </div>
+
+                <div class="test">
+                  <button class="btn_test">
+                    <span>
+                      ▶ PLAY TESTCASES
+                    </span>
+                  </button>
+                  <span class="img_0">
+                    <img src="images/03.png"/>
+                  </span>
+                  <div class="word_0">Test ManhAtTan</div>
+                </div>
+
+                <div class="test">
+                  <button class="btn_test">
+                    <span>
+                      ▶ PLAY TESTCASES
+                    </span>
+                  </button>
+                  <span class="img_0">
+                    <img src="images/04.png"/>
+                  </span>
+                  <div class="word_0">Test M@NH@TT@N</div>
+                </div>
+
+                <div class="test_0">
+                  <button class="btn_test">
+                    <span>
+                      ▶ PLAY TESTCASES
+                    </span>
+                  </button>
+                  <span class="img_0">
+                    <img src="images/05.png"/>
+                  </span>
+                  <div class="word_0">MANHATTAN with...</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 行动 -->
+            <div class="actions">
+                <!-- 标题 -->
+                <div class="actions_top">Action</div>
+                <!-- 执行按钮 -->
+                <div class="actions_bottom">
+                  <button class="btn_1">
+                    <span>▶</span>
+                    &nbsp;&nbsp;PLAY&nbsp;ALL&nbsp;TESTCASES
+                  </button>
+
+                  <button class="btn_2">
+                    <span>✔</span>
+                    &nbsp;&nbsp;SUBMIT
+                  </button>
+                </div>
+          </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script type="text/javascript">
+  createTextAreaWithLines('codeTextarea');
+  </script>
+</body>
+</html>
