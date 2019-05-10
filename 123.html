@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <link rel="stylesheet" type="text/css" href="css/css.css"/>
+<!-- 引导步骤 -->
+  <link rel="stylesheet" href="js/introjs.min.css"/>
+  <script type="text/javascript" src="js/intro.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+  <script>
+      $(function() {
+          introJs().setOptions({
+              'prevLabel': '← LAST',
+              'nextLabel': 'GOT IT →',
+              'skipLabel': 'SKIP',
+              'doneLabel': 'SUCCESS',
+              'exitOnOverlayClick': false,//是否允许点击空白退出
+              'showBullets': false,//隐藏直接跳转按钮(避免onchangebug)
+              'overlayOpacity': 0.5,//遮照层透明度
+          }).start().onexit(function() {//非常规退出
+              console.log(2);
+          }).oncomplete(function() {//正常完成
+              console.log(1);
+          }).onchange(function(obj) {//已完成当前一步
+              var curNum = parseInt($(obj).attr('step').match(/\d+/)[0]);//当前的下标
+
+              $('.tipStep'+ (curNum-1)).hide();//隐藏前一个
+              $('.tipStep'+ (curNum+1)).hide();//隐藏后一个
+              $(obj).show();//显示当前
+          });
+      });
+  </script>
+</head>
+<body>
+  <div>
+    <div style="width:100px;" step="1" intro="<div class='step1'><div class='title'>Welcome to the onboarding</div><p class='title_detail'>CodinGame lets you improve your coding skills with games. It all starts in the IDE, where you will code and test new ideas.</p></div>" position="right">123fasfgd</div>
+
+    <div style="width:100px;" step="2" intro="<div class='step2'><div class='title'>Welcome to the onboarding</div><p class='title_detail'>CodinGame lets you improve your coding skills with games. It all starts in the IDE, where you will code and test new ideas.</p></div>" position="middle">jhkjhkjhk</div>
+
+    <div style="width:100px;" step="3" intro="<div class='step3'><div class='title'>Welcome to the onboarding</div><p class='title_detail'>CodinGame lets you improve your coding skills with games. It all starts in the IDE, where you will code and test new ideas.</p></div>" position="middle">ututrrt</div>
+  </div>
+</body>
+</html>

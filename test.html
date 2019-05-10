@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>Main</title>
   <link rel="stylesheet" type="text/css" href="css/css.css"/>
+<!-- 引导步骤 -->
+  <link rel="stylesheet" href="js/introjs.min.css"/>
+  <script type="text/javascript" src="js/intro.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+
+<!-- 编辑器 -->
   <script type="text/javascript">
 var lineObjOffsetTop = 2;
 function createTextAreaWithLines(id)
@@ -46,6 +52,30 @@ function positionLineObj(obj,ta)
    obj.style.top = (ta.scrollTop * -1 + lineObjOffsetTop) + 'px';
 }
 </script>
+<!-- 新手指导 -->
+<script>
+    $(function() {
+        introJs().setOptions({
+            'prevLabel': '← LAST',
+            'nextLabel': 'GOT IT →',
+            'skipLabel': 'SKIP',
+            'doneLabel': 'SUCCESS',
+            'exitOnOverlayClick': false,//是否允许点击空白退出
+            'showBullets': false,//隐藏直接跳转按钮(避免onchangebug)
+            'overlayOpacity': 0.8,//遮照层透明度
+        }).start().onexit(function() {//非常规退出
+            console.log(2);
+        }).oncomplete(function() {//正常完成
+            console.log(1);
+        }).onchange(function(obj) {//已完成当前一步
+            var curNum = parseInt($(obj).attr('step').match(/\d+/)[0]);//当前的下标
+
+            $('.tipStep'+ (curNum-1)).hide();//隐藏前一个
+            $('.tipStep'+ (curNum+1)).hide();//隐藏后一个
+            $(obj).show();//显示当前
+        });
+    });
+</script>
 </head>
 <body>
   <!-- 整个页面 -->
@@ -84,6 +114,27 @@ function positionLineObj(obj,ta)
           <!-- 游戏描述 -->
           <div class="discription">
 
+            <div class="top1" step="1" intro="<div class='step1'><div class='title'>Welcome to the onboarding</div><p class='title_detail'>CodinGame lets you improve your coding skills with games. It all starts in the IDE, where you will code and test new ideas.</p></div>" position="right">
+              <video controls class="video">
+              <source src=""/>
+
+              </video>
+            </div>
+
+            <div class="top2" step="2" intro="<div class='step2'><div class='title'>This is your mission statement</div><p class='title_detail'>Solo and multiplayer coding games are turn-based: at each turn, your program gets new inputs and must output the action.</p></div>" position="right">
+              <div class="goal">
+                <div class="goal_title">⊙ The Goal</div>
+                <div class="goal_content">
+                  Fill in the game objectives here
+                </div>
+              </div>
+
+              <div class="rules">
+                <div class="rules_title">✔ Rules</div>
+                <div class="rules_content">Fill in the game rules here</div>
+              </div>
+            </div>
+
           </div>
 
           <!-- 输出口 -->
@@ -105,16 +156,28 @@ function positionLineObj(obj,ta)
           <!-- 代码编写处 -->
           <div class="write_code">
             <div class="write_top">
-              <select class="drop-down">
-                <option>Elm</option>
-                <option>Haskell</option>
-                <option>Java</option>
-                <option>Python</option>
-                <option>PHP</option>
-              </select>
+              <div class="top3" step="3" intro="<div class='step3'><div class='title'>Choose a programming language</div><p class='title_detail'>You can choose a language you already know or you can also learn a new language here. Ever tried 'Go'?</p></div>" position="left">
+                <select class="drop-down">
+                  <option>Elm</option>
+                  <option>Haskell</option>
+                  <option>Java</option>
+                  <option>Python</option>
+                  <option>PHP</option>
+                </select>
+              </div>
             </div>
-            <textarea id="codeTextarea">
-            </textarea>
+
+            <div class="top4" step="4" intro="<div class='step4'><div class='title'>Time to code!</div><p class='title_detail'>OK, let’s tell your program to shoot the closest Alien. Copy/Paste this code at the right place in the code editor.</p><div id='code'>
+              if (dist1 < dist2) {
+                  System.out.println(enemy1);
+              } else {
+                  System.out.println(enemy2);
+              }
+            </div></div>" position="left">
+                <textarea id="codeTextarea">
+                </textarea>
+            </div>
+
           </div>
 
           <div class="right_bottom">
@@ -127,17 +190,18 @@ function positionLineObj(obj,ta)
               </div>
               <!-- 测试题 -->
               <div class="bottom">
-
-                <div class="test">
-                  <button class="btn_test">
-                    <span>
-                      ▶ PLAY TESTCASES
+                <div class="top5" step="5" intro="<div class='step5'><div class='title'>Let's check your code</div><p class='title_detail'>Games have test cases to make sure you’ve solved it properly. Run your code by playing a test case.</p></div>" position="top">
+                  <div class="test">
+                    <button class="btn_test">
+                      <span>
+                        ▶ PLAY TESTCASES
+                      </span>
+                    </button>
+                    <span class="img_0">
+                      <img src="images/01.png"/>
                     </span>
-                  </button>
-                  <span class="img_0">
-                    <img src="images/01.png"/>
-                  </span>
-                  <div class="word_0">Test only letter:E</div>
+                    <div class="word_0">Test only letter:E</div>
+                  </div>
                 </div>
 
                 <div class="test">
@@ -202,10 +266,13 @@ function positionLineObj(obj,ta)
                     &nbsp;&nbsp;PLAY&nbsp;ALL&nbsp;TESTCASES
                   </button>
 
-                  <button class="btn_2">
-                    <span>✔</span>
-                    &nbsp;&nbsp;SUBMIT
-                  </button>
+                  <div class="top6" step="6" intro="<div class='step6'><div class='title'>You’re ready to learn, code and play</div><p class='title_detail'>Submit your solution to verify the robustness of your program in different situations. Now, let’s play more advanced coding games!</p></div>" position="top">
+                    <button class="btn_2">
+                      <span>✔</span>
+                      &nbsp;&nbsp;SUBMIT
+                    </button>
+                  </div>
+
                 </div>
           </div>
 
@@ -221,5 +288,6 @@ function positionLineObj(obj,ta)
   <script type="text/javascript">
   createTextAreaWithLines('codeTextarea');
   </script>
+
 </body>
 </html>
